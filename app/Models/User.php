@@ -8,8 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Contracts\Auth\CanResetPassword;
 
-class User extends Authenticatable  implements JWTSubject
+class User extends Authenticatable  implements JWTSubject, CanResetPassword
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -71,5 +72,10 @@ class User extends Authenticatable  implements JWTSubject
     public function sendEmailVerificationNotification()
     {
         $this->notify(new \Illuminate\Auth\Notifications\VerifyEmail);
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new \Illuminate\Auth\Notifications\ResetPassword($token));
     }
 }

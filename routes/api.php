@@ -22,8 +22,15 @@ Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('auth.google.callback');
 
 //Register
-Route::post('/register', [AuthController::class, 'register'])->name('register')->middleware('guest');
+Route::post('/auth/register', [AuthController::class, 'register'])->name('auth.register')->middleware('guest');
 Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verify'])->name('verification.verify')->middleware('signed');
 
+//Login
+Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login')->middleware('guest');
+ 
+//Recuperar contraseña
+Route::post('/auth/password/reset', [AuthController::class, 'sendResetLinkEmail'])->name('auth.password.reset'); 
+Route::get('/password/reset/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
+Route::post('/auth/password/reset/process', [AuthController::class, 'resetPassword'])->name('auth.password.reset.process');
 //Logout
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth:api');
+Route::post('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout')->middleware('auth:api');
