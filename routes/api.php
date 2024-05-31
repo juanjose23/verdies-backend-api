@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\CategoriasController;
+use App\Http\Controllers\ProductosController;
+use App\Http\Controllers\VerdCoinsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,3 +37,17 @@ Route::get('/password/reset/{token}', [AuthController::class, 'showResetForm'])-
 Route::post('/auth/password/reset/process', [AuthController::class, 'resetPassword'])->name('auth.password.reset.process');
 //Logout
 Route::post('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout')->middleware('auth:api');
+
+
+//Gestion de catalagos
+Route::middleware('auth:api')->group(function () {
+    Route::resource('verdcoins', VerdCoinsController::class)->parameters(['verdcoins' => 'verdcoins'])->names('verdcoins');
+});
+
+Route::middleware('auth:api')->group(function () {
+    Route::resource('categorias', CategoriasController::class)->parameters(['categorias' => 'categorias'])->names('categorias');
+});
+
+Route::middleware('auth:api')->group(function () {
+    Route::resource('productos', ProductosController::class)->parameters(['productos' => 'productos'])->names('productos');
+});
