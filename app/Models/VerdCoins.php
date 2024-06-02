@@ -14,5 +14,9 @@ class VerdCoins extends Model
     {
         return self::all();
     }
+    public function tasas()
+    {
+        return $this->hasMany('App\Models\Tasa_equivalencia');
+    }
 
 }

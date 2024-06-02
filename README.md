@@ -1,66 +1,140 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Verdies API
+<p align="center"><a href="" target="_blank"><img src="https://res.cloudinary.com/dxtlbsa62/image/upload/v1716879981/Verdies/vkifvb82kknzphziyuws.jpg" width="400" alt="VerdIES Logo"></a></p>
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Estado de la Construcción"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Descargas Totales"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Última Versión Estable"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="Licencia"></a>
 </p>
 
-## About Laravel
+## Acerca de Verdies API
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Verdies API es una API backend construida con Laravel 10, utilizando JWT para la autenticación y MySQL como gestor de base de datos. La API proporciona funcionalidades para la autenticación de usuarios, gestión de productos y categorías, así como la gestión de tasas de cambio y monedas equivalentes (Verdcoins).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Características
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Autenticación de Usuarios**: Registro, inicio de sesión, cierre de sesión, restablecimiento de contraseña y verificación de correo electrónico.
+- **Autenticación con Google**: Autenticación OAuth2 a través de Google.
+- **Gestión de Catálogo**: Operaciones CRUD para categorías, productos y tasas de cambio (Verdcoins).
+- **Autenticación JWT**: Acceso seguro a rutas protegidas.
+- **Base de Datos MySQL**: Gestión de bases de datos robusta y escalable.
 
-## Learning Laravel
+## Comenzando
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Requisitos Previos
+- PHP 8.0 o superior
+- Composer
+- MySQL
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Instalación
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. Clona el repositorio:
+    ```sh
+    git clone https://github.com/juanjose23/verdies-backend-api.git
+    cd verdies-backend-api
+    ```
 
-## Laravel Sponsors
+2. Instala las dependencias:
+    ```sh
+    composer install
+    ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+3. Copia el archivo `.env.example` a `.env` y configura tus variables de entorno, especialmente los ajustes de la base de datos y las credenciales de Google OAuth:
+    ```sh
+    cp .env.example .env
+    ```
+4. Configura las variables de entorno en tu archivo `.env`:
+    ```plaintext
+    GOOGLE_CLIENT_ID=tu-client-id
+    GOOGLE_CLIENT_SECRET=tu-client-secret
+    GOOGLE_REDIRECT_URI=dominio.com/api/auth/google/callback
 
-### Premium Partners
+    CLOUDINARY_CLOUD_NAME=tu-cloud-name
+    CLOUDINARY_API_KEY=tu-api-key
+    CLOUDINARY_API_SECRET=tu-api-secret
+    CLOUDINARY_URL=tu-url
+    ```
+5. Genera la clave de la aplicación:
+    ```sh
+    php artisan key:generate
+    ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+6. Ejecuta las migraciones:
+    ```sh
+    php artisan migrate
+    ```
 
-## Contributing
+7. Pobla la base de datos:
+    ```sh
+    php artisan db:seed
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+8. Inicia el servidor de desarrollo local:
+    ```sh
+    php artisan serve
+    ```
 
-## Code of Conduct
+### Endpoints de la API
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+#### Autenticación
 
-## Security Vulnerabilities
+- **Autenticación con Google**:
+    - `GET /auth/google` - Redirige a Google para autenticación.
+    - `GET /auth/google/callback` - Maneja el callback de Google.
+  
+- **Registro**:
+    - `POST /auth/register` - Registra un nuevo usuario.
+    - `GET /email/verify/{id}/{hash}` - Verifica la dirección de correo electrónico.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- **Inicio de Sesión**:
+    - `POST /auth/login` - Inicia sesión de usuario.
+  
+- **Restablecimiento de Contraseña**:
+    - `POST /auth/password/reset` - Envía enlace de restablecimiento de contraseña.
+    - `GET /password/reset/{token}` - Muestra el formulario de restablecimiento de contraseña.
+    - `POST /auth/password/reset/process` - Restablece la contraseña.
 
-## License
+- **Cierre de Sesión**:
+    - `POST /auth/logout` - Cierra la sesión del usuario.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### Gestión del Catálogo (Rutas Autenticadas)
+
+- **Verdcoins**:
+    - `GET /verdcoins` - Lista todos los Verdcoins.
+    - `POST /verdcoins` - Crea un nuevo Verdcoin.
+    - `GET /verdcoins/{verdcoins}` - Obtiene un Verdcoin específico.
+    - `PUT /verdcoins/{verdcoins}` - Actualiza un Verdcoin.
+    - `DELETE /verdcoins/{verdcoins}` - Elimina un Verdcoin.
+
+- **Categorías**:
+    - `GET /categorias` - Lista todas las categorías.
+    - `POST /categorias` - Crea una nueva categoría.
+    - `GET /categorias/{categorias}` - Obtiene una categoría específica.
+    - `PUT /categorias/{categorias}` - Actualiza una categoría.
+    - `DELETE /categorias/{categorias}` - Elimina una categoría.
+
+- **Productos**:
+    - `GET /productos` - Lista todos los productos.
+    - `POST /productos` - Crea un nuevo producto.
+    - `GET /productos/{productos}` - Obtiene un producto específico.
+    - `PUT /productos/{productos}` - Actualiza un producto.
+    - `DELETE /productos/{productos}` - Elimina un producto.
+
+- **Tasas de Cambio**:
+    - `GET /tasa_equivalencia` - Lista todas las tasas de cambio.
+    - `POST /tasa_equivalencia` - Crea una nueva tasa de cambio.
+    - `GET /tasa_equivalencia/{tasa_equivalencia}` - Obtiene una tasa de cambio específica.
+    - `PUT /tasa_equivalencia/{tasa_equivalencia}` - Actualiza una tasa de cambio.
+    - `DELETE /tasa_equivalencia/{tasa_equivalencia}` - Elimina una tasa de cambio.
+
+## Contribuir
+¡Gracias por considerar contribuir a Verdies API! 
+
+## Vulnerabilidades de Seguridad
+
+Si descubres una vulnerabilidad de seguridad en Verdies API, por favor envía un correo electrónico a los mantenedores del proyecto. Todas las vulnerabilidades de seguridad serán abordadas de inmediato.
+
+## Licencia
+
+Verdies API es un software de código abierto licenciado bajo la [licencia MIT](https://opensource.org/licenses/MIT).

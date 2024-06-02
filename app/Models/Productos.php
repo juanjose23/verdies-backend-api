@@ -14,32 +14,30 @@ class Productos extends Model
     {
         return $this->belongsTo('App\Models\categorias');
     }
-
+    public function tasas()
+    {
+        return $this->hasMany('App\Models\Tasa_equivalencia');
+    }
 
     /**
      * Obtiene el producto con información de categoría, código, nombre, descripción y estado.
      *
      * @param  int  $id
-     * @return \Illuminate\Support\Collection
+     * @return array
+     *  @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
-    public function ObtenerProducto($id)
+    public function obtenerProducto($id)
     {
         // Obtener el producto con sus relaciones de categoría
-        $producto = self::with(['categorias'])->findOrFail($id);
-
-      
+        $producto = Productos::with('categorias')->findOrFail($id);
 
         // Transformar el producto para incluir solo la información deseada
-        $productoTransformado = [
-            'categoria' => $producto->categorias->nombre,
-            'codigo' => $producto->codigo,
-            'nombre' => $producto->nombre,
-            'descripcion' => $producto->descripcion,
-            'estado' => $producto->estado,
+        return[
+            'Categoria'=>$producto->categorias->nombre,
+            'Productos'=>$producto->nombre,
+            'Descripcion'=>$producto->descripcion,
+            'Estado'=>$producto->estado,
         ];
-
-        // Devolver el producto transformado como un array
-        return $productoTransformado;
     }
 
 

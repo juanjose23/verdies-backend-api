@@ -14,10 +14,25 @@ class VerdCoinsSeeder extends Seeder
     public function run(): void
     {
         //
-        VerdCoins::create([
-            'nombre' =>'VerdCoins',
-            'descripcion' => 'Moneda de canje' 
-        ]);
+
+        $Monedas = [
+            [
+                'nombre' => 'Verdcoins',
+                'descripcion' => 'Moneda virtual estándar para realizar transacciones y compras en la plataforma.',
+                'estado' => 1
+            ],
+            [
+                'nombre' => 'Verdcoins Premium',
+                'descripcion' => 'Moneda virtual premium que ofrece beneficios adicionales y descuentos exclusivos en la plataforma.',
+                'estado' => 1
+            ]
+        ];
+
+
+        foreach ($Monedas as $moneda) {
+            VerdCoins::create($moneda);
+          
+        }
 
     }
 }

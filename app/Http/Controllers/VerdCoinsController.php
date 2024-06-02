@@ -22,7 +22,7 @@ class VerdCoinsController extends Controller
     }
 
     public function store(StoreMonedas $request)
-    {
+    { 
         $moneda = new VerdCoins();
         $moneda->nombre = $request->nombre;
         $moneda->descripcion = $request->descripcion;

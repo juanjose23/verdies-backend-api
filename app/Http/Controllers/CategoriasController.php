@@ -52,9 +52,9 @@ class CategoriasController extends Controller
         $categoria =categorias::findOrFail($categorias->id);
 
         return response()->json([
-            'estado' => 'éxito',
+            'estado' => 'exito',
             'categoria' => $categoria,
-            'mensaje' => 'Moneda obtenida con éxito.',
+            'mensaje' => 'Categoria obtenida con éxito.',
         ], 200);
     }
 
